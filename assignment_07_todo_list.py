@@ -3,7 +3,15 @@
 # =============================================================================
 #
 # TASK: Console-Based To-Do List Application
-#
+def show_menu():
+    
+    print("\n")
+    print("TO-DO LIST MENU")
+    
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
 # Build a simple to-do list program that runs entirely in the console and
 # allows the user to manage their tasks interactively using a menu.
 #
@@ -14,17 +22,46 @@
 #   1. Add a Task
 #      - Prompt the user to type a task description.
 #      - Add it to the list and confirm it was added.
-#
+def add_task(tasks):
+    
+    task_desc = input("Enter task: ")
+    if task_desc.strip():
+        tasks.append(task_desc)
+        print('Task added: "' + task_desc + '"')
+    else:
+        print("Error: Task description cannot be empty.")
 #   2. View All Tasks
 #      - Display all tasks currently in the list, numbered from 1.
 #      - If the list is empty, print a friendly message saying so.
-#
+def view_tasks(tasks):
+    
+    if not tasks:
+        print("\nYour to-do list is currently empty!")
+    else:
+        print("\nYour Tasks:")
+        for index, task in enumerate(tasks, start=1):
+            print(str(index) + ". " + task)
 #   3. Delete a Task
 #      - Show the list of tasks with their numbers.
 #      - Ask the user which task number they want to remove.
 #      - Remove the task and confirm the deletion.
 #      - If the task number is invalid, print an error message.
-#
+def delete_task(tasks):
+   
+    if not tasks:
+        print("\nYour to-do list is empty. Nothing to delete!")
+        return
+
+    view_tasks(tasks)
+    try:
+        task_num = int(input("\nEnter task number to delete: "))
+        if 1 <= task_num <= len(tasks):
+            removed_task = tasks.pop(task_num - 1)
+            print('Task "' + removed_task + '" has been removed.')
+        else:
+            print("Error: Invalid task number.")
+    except ValueError:
+        print("Error: Please enter a valid integer number.")
 #   4. Quit
 #      - End the program with a farewell message.
 #
@@ -72,7 +109,24 @@
 # - Use a loop to keep the menu running until the user chooses to quit.
 # - Each feature MUST be implemented in its own function (see scaffold below).
 # - Handle invalid menu choices gracefully (print an error, do not crash).
-#
+if __name__ == "__main__":
+    todo_list = []
+    
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            add_task(todo_list)
+        elif choice == "2":
+            view_tasks(todo_list)
+        elif choice == "3":
+            delete_task(todo_list)
+        elif choice == "4":
+            print("\nGoodbye!")
+            break
+        else:
+            print("Error: Invalid choice. Please enter a number from 1 to 4.")
 
 #
 # =============================================================================

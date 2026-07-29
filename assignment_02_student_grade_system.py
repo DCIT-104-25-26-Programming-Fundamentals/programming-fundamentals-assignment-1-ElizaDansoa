@@ -4,10 +4,23 @@
 # =============================================================================
 #
 # TASK: Student Grade System
-#
+def get_grade(score):
 # Write a Python program that reads a student's score and outputs the
 # corresponding letter grade based on the scale below.
-#
+    if score < 0 or score > 100:
+        return None
+    
+    
+    if score >= 80:
+        return "A"
+    elif score >= 70:
+        return "B"
+    elif score >= 60:
+        return "C"
+    elif score >= 50:
+        return "D"
+    else:
+        return "F"
 # Grading Scale:
 #   Score 80 – 100  →  Grade A
 #   Score 70 – 79   →  Grade B
@@ -38,7 +51,16 @@
 # - Validate that the score is within the range 0–100 inside get_grade().
 #   If it is not, return None and let main() print the error message.
 # - Use if / elif / else to determine the grade.
-#
+
+if __name__ == "__main__":
+    score_input = float(input("Enter student score (0-100): "))
+    
+    grade = get_grade(score_input)
+    
+    if grade is None:
+        print("Error: Score must be between 0 and 100.")
+    else:
+        print("Grade:", grade)
 
 #
 # =============================================================================
